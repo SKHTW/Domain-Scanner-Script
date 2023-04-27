@@ -12,6 +12,7 @@ Domain Scanner
 This Bash script is designed to perform a comprehensive scan of a target domain or list of domains, including subdomain enumeration, open port scanning, HTTP/HTTPS connection testing, and directory/file enumeration. The results of each scan are saved to separate files in the 'reports' directory.
 
 Dependencies
+
 The following tools are required to run the script:
 
 Amass
@@ -40,5 +41,11 @@ Run the script:
 Follow the prompts to enter the target domain(s) and select which scans to perform. You can enter a single domain or a list of domains separated by spaces.
 The results of each scan will be saved to a separate file in the 'reports' directory. The file names will include the name of the scan type and the target domain. For example, the subdomain enumeration report for 'example.com' would be saved to 'reports/example.com_subdomains.txt'.
 
+Notice:
+
+Depending on the size and complexity of the website you're scanning, the tool can take some time to complete all of the scans. Please be patient and allow the tool to finish before moving on to your next target. Also, keep in mind that some domains may not have subdomains or open ports, so don't be alarmed if the results are not as extensive as you were hoping for. Happy hunting!
+
+
 License
+
 This project is licensed under the terms of the MIT license. See the LICENSE file for details.
