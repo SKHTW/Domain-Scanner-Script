@@ -1,19 +1,32 @@
+This tool is beneficial for automating recon in bug bounties because it helps to streamline the process of gathering information about a target domain. By automating tasks such as subdomain enumeration, port scanning, and directory enumeration, the tool frees up time for security researchers to focus on more critical tasks such as analyzing vulnerabilities and developing exploits.
+
+Furthermore, the tool can help to identify potential attack vectors that might have been missed during manual testing, which can be crucial in uncovering hidden vulnerabilities. Additionally, it can help to increase the efficiency of bug bounty hunters by automating repetitive tasks and reducing the amount of manual work required to conduct a comprehensive reconnaissance of a target domain.
+
+Overall, this tool can be a valuable addition to the arsenal of any bug bounty hunter looking to improve their efficiency and increase their chances of uncovering vulnerabilities.
+
+
 README
+
 Domain Scanner
+
 This Bash script is designed to perform a comprehensive scan of a target domain or list of domains, including subdomain enumeration, open port scanning, HTTP/HTTPS connection testing, and directory/file enumeration. The results of each scan are saved to separate files in the 'reports' directory.
 
 Dependencies
 The following tools are required to run the script:
 
 Amass
+
 Nmap
+
 cURL
+
+
 
 Usage
 
 Clone the repository to your local machine using the following command:
 
-git clone https://github.com/your-username/domain-scanner.git
+git clone https://github.com/SKHTW/Domain-Scanner-Script.git
 
 Install the required dependencies:
 
