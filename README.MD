@@ -1,4 +1,5 @@
 README
+
 This tool is beneficial for automating recon in bug bounties because it helps to streamline the process of gathering information about a target domain. By automating tasks such as subdomain enumeration, port scanning, and directory enumeration, the tool frees up time for security researchers to focus on more critical tasks such as analyzing vulnerabilities and developing exploits.
 
 Additionally, this tool can now perform scans using Assetfinder, Subfinder, Dnsgen, Massdns, Httprobe, and Aquatone. These scans can help to identify potential attack vectors that might have been missed during manual testing and increase the efficiency of bug bounty hunters.
