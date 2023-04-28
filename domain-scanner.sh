@@ -44,6 +44,48 @@ get_ip() {
   echo "IP address: $ip"
 }
 
+# Function to run assetfinder scan
+run_assetfinder() {
+  domain=$1
+  echo "Running Assetfinder for $domain..."
+  assetfinder $domain > $output_dir/${domain}_assetfinder.txt
+}
+
+# Function to run subfinder scan
+run_subfinder() {
+  domain=$1
+  echo "Running Subfinder for $domain..."
+  subfinder -d $domain -o $output_dir/${domain}_subfinder.txt
+}
+
+# Function to run dnsgen scan
+run_dnsgen() {
+  domain=$1
+  echo "Running Dnsgen for $domain..."
+  dnsgen $domain > $output_dir/${domain}_dnsgen.txt
+}
+
+# Function to run massdns scan
+run_massdns() {
+  domain=$1
+  echo "Running Massdns for $domain..."
+  massdns -r /usr/share/massdns/lists/resolvers.txt -o S $output_dir/${domain}_massdns.txt $output_dir/${domain}_amass.txt
+}
+
+# Function to run httprobe scan
+run_httprobe() {
+  domain=$1
+  echo "Running Httprobe for $domain..."
+  cat $output_dir/${domain}_live.txt | httprobe -c 50 -t 3000 > $output_dir/${domain}_httprobe.txt
+}
+
+# Function to run aquatone scan
+run_aquatone() {
+  domain=$1
+  echo "Running Aquatone for $domain..."
+  cat $output_dir/${domain}_httprobe.txt | aquatone -chrome-path /usr/bin/google-chrome-stable -out $output_dir/aquatone
+}
+
 # Loop through the domains and perform the selected scans
 while true; do
   echo "Please enter a domain to scan (or 'q' to quit):"
@@ -61,7 +103,7 @@ while true; do
   echo "2. Test subdomains for HTTP/HTTPS connectivity"
   echo "3. Scan for open ports"
   echo "4. Get the IP address of the domain"
-  echo "5. Perform all scans"
+  echo "5. Run all scans (Amass, Assetfinder, Subfinder, Dnsgen, Massdns, Httprobe, and Aquatone)"
   read scans
 
   # Determine which scans to perform
@@ -75,9 +117,12 @@ while true; do
     get_ip "$domain"
   elif [[ "$scans" == "5" ]]; then
     run_amass "$domain"
-    test_subdomains "$domain"
-    scan_ports "$domain"
-    get_ip "$domain"
+    run_assetfinder "$domain"
+    run_subfinder "$domain"
+    run_dnsgen "$domain"
+    run_massdns "$domain"
+    run_httprobe "$domain"
+    run_aquatone "$domain"
   else
     echo "Invalid input. Please try again."
     continue
