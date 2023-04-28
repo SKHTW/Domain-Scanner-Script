@@ -1,14 +1,10 @@
+README
 This tool is beneficial for automating recon in bug bounties because it helps to streamline the process of gathering information about a target domain. By automating tasks such as subdomain enumeration, port scanning, and directory enumeration, the tool frees up time for security researchers to focus on more critical tasks such as analyzing vulnerabilities and developing exploits.
 
 Additionally, this tool can now perform scans using Assetfinder, Subfinder, Dnsgen, Massdns, Httprobe, and Aquatone. These scans can help to identify potential attack vectors that might have been missed during manual testing and increase the efficiency of bug bounty hunters.
 
 Overall, this tool can be a valuable addition to the arsenal of any bug bounty hunter looking to improve their efficiency and increase their chances of uncovering vulnerabilities.
 
-README
-
-Domain Scanner
-
-This Bash script is designed to perform a comprehensive scan of a target domain or list of domains, including subdomain enumeration, open port scanning, HTTP/HTTPS connection testing, directory/file enumeration, Assetfinder, Subfinder, Dnsgen, Massdns, Httprobe, and Aquatone. The results of each scan are saved to separate files in the 'reports' directory.
 
 Dependencies
 
@@ -32,77 +28,6 @@ Httprobe
 
 Aquatone
 
-Usage
-
-This tool is beneficial for automating recon in bug bounties because it helps to streamline the process of gathering information about a target domain. By automating tasks such as subdomain enumeration, port scanning, and directory enumeration, the tool frees up time for security researchers to focus on more critical tasks such as analyzing vulnerabilities and developing exploits.
-
-Additionally, this tool can now perform scans using Assetfinder, Subfinder, Dnsgen, Massdns, Httprobe, and Aquatone. These scans can help to identify potential attack vectors that might have been missed during manual testing and increase the efficiency of bug bounty hunters.
-
-Overall, this tool can be a valuable addition to the arsenal of any bug bounty hunter looking to improve their efficiency and increase their chances of uncovering vulnerabilities.
-
-README
-
-Domain Scanner
-
-This Bash script is designed to perform a comprehensive scan of a target domain or list of domains, including subdomain enumeration, open port scanning, HTTP/HTTPS connection testing, directory/file enumeration, Assetfinder, Subfinder, Dnsgen, Massdns, Httprobe, and Aquatone. The results of each scan are saved to separate files in the 'reports' directory.
-
-Dependencies
-
-The following tools are required to run the script:
-
-Amass
-
-Nmap
-
-cURL
-
-Assetfinder
-
-Subfinder
-
-Dnsgen
-
-Massdns
-
-Httprobe
-
-Aquatone
-
-Usage
-
-This tool is beneficial for automating recon in bug bounties because it helps to streamline the process of gathering information about a target domain. By automating tasks such as subdomain enumeration, port scanning, and directory enumeration, the tool frees up time for security researchers to focus on more critical tasks such as analyzing vulnerabilities and developing exploits.
-
-Additionally, this tool can now perform scans using Assetfinder, Subfinder, Dnsgen, Massdns, Httprobe, and Aquatone. These scans can help to identify potential attack vectors that might have been missed during manual testing and increase the efficiency of bug bounty hunters.
-
-Overall, this tool can be a valuable addition to the arsenal of any bug bounty hunter looking to improve their efficiency and increase their chances of uncovering vulnerabilities.
-
-README
-
-Domain Scanner
-
-This Bash script is designed to perform a comprehensive scan of a target domain or list of domains, including subdomain enumeration, open port scanning, HTTP/HTTPS connection testing, directory/file enumeration, Assetfinder, Subfinder, Dnsgen, Massdns, Httprobe, and Aquatone. The results of each scan are saved to separate files in the 'reports' directory.
-
-Dependencies
-
-The following tools are required to run the script:
-
-Amass
-
-Nmap
-
-cURL
-
-Assetfinder
-
-Subfinder
-
-Dnsgen
-
-Massdns
-
-Httprobe
-
-Aquatone
 
 Usage
 
@@ -114,7 +39,11 @@ Change to the cloned directory:
 
 cd Domain-Scanner-Script
 
+
+
 Run the requirements.sh script to install the required dependencies:
+
+sudo bash requirements.sh
 
 Change the permission of the domain-scanner.sh script:
 
