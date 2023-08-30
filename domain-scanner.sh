@@ -3,27 +3,34 @@
 # Function to run the Amass scan
 run_amass() {
   domain=$1
+  output_dir="./$domain"
+  mkdir -p "$output_dir"
+
   echo "Running Amass for $domain..."
-  amass enum -active -d $domain -o $output_dir/${domain}_amass.txt
+  amass enum -active -d $domain -o "$output_dir/${domain}_amass.txt"
 }
 
 # Function to test subdomains for connectivity
 test_subdomains() {
   domain=$1
+  output_dir="./$domain"
+  mkdir -p "$output_dir"
+
+  amass_output="$output_dir/${domain}_amass.txt"
   echo "Testing subdomains for $domain..."
   live_subdomains=""
   while read subdomain; do
     echo "Testing $subdomain..."
-    if curl -s --head $subdomain 2>&1 | grep "HTTP/1.[01] [23]"; then
+    if curl -s --head "$subdomain" 2>&1 | grep "HTTP/1.[01] [23]"; then
       echo "$subdomain is up (HTTP)"
       live_subdomains+="$subdomain"$'\n'
-    elif curl -s --head https://$subdomain 2>&1 | grep "HTTP/1.[01] [23]"; then
+    elif curl -s --head "https://$subdomain" 2>&1 | grep "HTTP/1.[01] [23]"; then
       echo "$subdomain is up (HTTPS)"
       live_subdomains+="$subdomain"$'\n'
     else
       echo "$subdomain is down"
     fi
-  done < "$output_dir/${domain}_amass.txt"
+  done < "$amass_output"
 
   # Write the live subdomains to a file
   echo -n "$live_subdomains" > "$output_dir/${domain}_live.txt"
@@ -32,13 +39,19 @@ test_subdomains() {
 # Function to scan for open ports
 scan_ports() {
   domain=$1
+  output_dir="./$domain"
+  mkdir -p "$output_dir"
+
   echo "Scanning ports for $domain..."
-  nmap -T4 -sS -Pn $domain -oG $output_dir/${domain}_nmap.gnmap > /dev/null
+  nmap -T4 -sS -Pn $domain -oG "$output_dir/${domain}_nmap.gnmap" > /dev/null
 }
 
 # Function to get the IP address of the domain
 get_ip() {
   domain=$1
+  output_dir="./$domain"
+  mkdir -p "$output_dir"
+
   echo "Getting IP address for $domain..."
   ip=$(dig +short $domain | head -n 1)
   echo "IP address: $ip"
@@ -47,43 +60,61 @@ get_ip() {
 # Function to run assetfinder scan
 run_assetfinder() {
   domain=$1
+  output_dir="./$domain"
+  mkdir -p "$output_dir"
+
   echo "Running Assetfinder for $domain..."
-  assetfinder $domain > $output_dir/${domain}_assetfinder.txt
+  assetfinder $domain > "$output_dir/${domain}_assetfinder.txt"
 }
 
 # Function to run subfinder scan
 run_subfinder() {
   domain=$1
+  output_dir="./$domain"
+  mkdir -p "$output_dir"
+
   echo "Running Subfinder for $domain..."
-  subfinder -d $domain -o $output_dir/${domain}_subfinder.txt
+  subfinder -d $domain -o "$output_dir/${domain}_subfinder.txt"
 }
 
 # Function to run dnsgen scan
 run_dnsgen() {
   domain=$1
+  output_dir="./$domain"
+  mkdir -p "$output_dir"
+
   echo "Running Dnsgen for $domain..."
-  dnsgen $domain > $output_dir/${domain}_dnsgen.txt
+  dnsgen $domain > "$output_dir/${domain}_dnsgen.txt"
 }
 
 # Function to run massdns scan
 run_massdns() {
   domain=$1
+  output_dir="./$domain"
+  mkdir -p "$output_dir"
+
   echo "Running Massdns for $domain..."
-  massdns -r /usr/share/massdns/lists/resolvers.txt -o S $output_dir/${domain}_massdns.txt $output_dir/${domain}_amass.txt
+  massdns -r /usr/share/massdns/lists/resolvers.txt -o S "$output_dir/${domain}_massdns.txt" "$output_dir/${domain}_amass.txt"
 }
 
 # Function to run httprobe scan
 run_httprobe() {
   domain=$1
+  output_dir="./$domain"
+  mkdir -p "$output_dir"
+
   echo "Running Httprobe for $domain..."
-  cat $output_dir/${domain}_live.txt | httprobe -c 50 -t 3000 > $output_dir/${domain}_httprobe.txt
+  cat "$output_dir/${domain}_live.txt" | httprobe -c 50 -t 3000 > "$output_dir/${domain}_httprobe.txt"
 }
 
 # Function to run aquatone scan
 run_aquatone() {
   domain=$1
+  output_dir="./$domain"
+  mkdir -p "$output_dir"
+
   echo "Running Aquatone for $domain..."
-  cat $output_dir/${domain}_httprobe.txt | aquatone -chrome-path /usr/bin/google-chrome-stable -out $output_dir/aquatone
+  cat "$output_dir/${domain}_httprobe.txt" | aquatone -chrome-path /usr/bin/google-chrome-stable -out "$output_dir/aquatone"
 }
 
 # Loop through the domains and perform the selected scans
